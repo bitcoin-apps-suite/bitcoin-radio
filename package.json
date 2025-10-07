@@ -1,0 +1,43 @@
+{
+  "name": "bitcoin-radio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "kill:3000": "lsof -ti:3000 | xargs kill -9",
+    "kill:dev": "lsof -ti:3000 | xargs kill -9 && lsof -ti:3001 | xargs kill -9",
+    "kill:all": "for port in {3000..3010}; do lsof -ti:$port | xargs kill -9 2>/dev/null || true; done"
+  },
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@handcash/handcash-connect": "^0.8.11",
+    "axios": "^1.12.2",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.22",
+    "lucide-react": "^0.544.0",
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-player": "^3.3.3",
+    "recharts": "^3.2.1",
+    "wavesurfer.js": "^7.7.2",
+    "howler": "^2.2.4",
+    "web-audio-api": "^0.2.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

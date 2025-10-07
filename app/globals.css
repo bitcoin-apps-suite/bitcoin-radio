@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  /* Bitcoin Radio duo-tone brown theme */
+  --brown-primary: #8B4513;        /* SaddleBrown */
+  --brown-secondary: #A0522D;      /* Sienna */
+  --brown-dark: #654321;           /* DarkBrown */
+  --brown-accent: #D2691E;         /* Chocolate */
+  --brown-light: #CD853F;          /* Peru */
+  --brown-glow: rgba(139, 69, 19, 0.4);
+  
+  /* Legacy orange variables for backward compatibility - now browns */
+  --orange-primary: #8B4513;
+  --orange-secondary: #A0522D;
+  --orange-glow: rgba(139, 69, 19, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(to bottom, #0a0a0a, #000000, #0a0a0a);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main app container responsive padding */
+.main-app-container {
+  padding-top: 72px; /* Desktop: POC banner (40px) + TopMenuBar (32px) */
+}
+
+@media (max-width: 768px) {
+  .main-app-container {
+    padding-top: 104px; /* Mobile: POC banner (72px) + TopMenuBar (32px) */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-app-container {
+    padding-top: 100px; /* Small mobile: POC banner (68px) + TopMenuBar (32px) */
+  }
+}
+
+::selection {
+  background: var(--brown-primary);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--brown-primary), var(--brown-secondary));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brown-primary);
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, var(--brown-primary), var(--brown-secondary));
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px -5px var(--brown-glow);
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(to right, var(--brown-secondary), var(--brown-accent));
+    transform: scale(1.05);
+    box-shadow: 0 20px 25px -5px rgba(139, 69, 19, 0.5);
+  }
+  
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(to right, var(--brown-secondary), var(--brown-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glow-brown {
+    box-shadow: 0 0 30px var(--brown-glow);
+  }
+  
+  /* Legacy orange class - now brown */
+  .glow-orange {
+    box-shadow: 0 0 30px var(--brown-glow);
+  }
+  
+  .skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background: linear-gradient(to right, #1f2937, #374151, #1f2937);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mask-gradient {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
