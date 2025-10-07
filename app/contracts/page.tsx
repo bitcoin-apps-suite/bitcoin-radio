@@ -72,15 +72,15 @@ export default function ContractsPage() {
       const pullRequests = prsResponse.ok ? await prsResponse.json() : []
       
       // Map issues to contracts - ONLY DEVELOPER CONTRACTS
-      const mappedContracts = issues.map((issue: any): Contract | null => {
+      const mappedContracts = issues.map((issue: unknown): Contract | null => {
         const body = issue.body || ''
         
-        let priorityMatch = body.match(/\*\*Priority:\*\*\s*(Critical|High|Medium|Low)/i)
-        let hoursMatch = body.match(/\*\*Estimated Hours:\*\*\s*([\d,]+)/i)
+        const priorityMatch = body.match(/\*\*Priority:\*\*\s*(Critical|High|Medium|Low)/i)
+        const hoursMatch = body.match(/\*\*Estimated Hours:\*\*\s*([\d,]+)/i)
         let rewardMatch = body.match(/\*\*Token Reward:\*\*\s*([\d,]+)\s*BVIDEO/i)
         
         // Find matching PR if exists
-        const matchingPR = pullRequests.find((pr: any) => 
+        const matchingPR = pullRequests.find((pr: unknown) => 
           pr.body && pr.body.includes(`#${issue.number}`)
         )
         
@@ -305,7 +305,7 @@ export default function ContractsPage() {
             <div>
               <h3 className="text-xl font-bold text-orange-300 mb-2">$BVIDEO Developer Rewards</h3>
               <p className="text-gray-300 mb-3">
-                We're offering <strong>substantial $BVIDEO token rewards</strong> to developers who help build out the platform.
+                We&apos;re offering <strong>substantial $BVIDEO token rewards</strong> to developers who help build out the platform.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
