@@ -107,11 +107,6 @@ export default function ContractsPage() {
           if (tasks.includes('API') || tasks.includes('api')) skills.push('API Development')
         }
         
-        // Default reward based on issue number for demo
-        if (!rewardMatch) {
-          const tokenAmount = Math.floor(Math.random() * 50000) + 10000 // 10k-60k BVIDEO
-          rewardMatch = ['', tokenAmount.toLocaleString()]
-        }
         
         // Extract deliverables
         const deliverables: string[] = []
@@ -148,8 +143,8 @@ export default function ContractsPage() {
           githubIssueUrl: issue.html_url,
           title: issue.title,
           description: description,
-          reward: rewardMatch ? `${rewardMatch[1]} BVIDEO` : '25,000 BVIDEO',
-          estimatedHours: hoursMatch ? parseInt(hoursMatch[1].replace(/,/g, '')) : Math.floor(Math.random() * 40) + 8,
+          reward: rewardMatch ? `${rewardMatch[1]} BRADIO` : 'To be agreed',
+          estimatedHours: hoursMatch ? parseInt(hoursMatch[1].replace(/,/g, '')) : 0,
           priority: (priorityMatch ? priorityMatch[1] : 'Medium') as Contract['priority'],
           category: 'developer' as const,
           status,
@@ -516,7 +511,7 @@ export default function ContractsPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-white mb-2">HandCash Handle (optional)</label>
+                  <label className="block text-sm font-semibold text-white mb-2">Paymail (optional)</label>
                   <input 
                     type="text"
                     value={claimForm.handcashHandle}

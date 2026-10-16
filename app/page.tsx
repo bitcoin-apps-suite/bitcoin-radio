@@ -44,6 +44,7 @@ import BitcoinRadioStudio from '@/components/BitcoinRadioStudio'
 import RadioProjectSidebar from '@/components/RadioProjectSidebar'
 import Footer from '@/components/Footer'
 import OSTaskbar from '@/components/OSTaskbar'
+import SaveOnChain from '@/components/SaveOnChain'
 
 interface AudioShow {
   id: string
@@ -73,9 +74,7 @@ interface RadioProject {
 export default function BitcoinRadio() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [btcPrice, setBtcPrice] = useState('67,432')
-  const [priceChange, setPriceChange] = useState('+2.4%')
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading] = useState(false)
   const [viewMode, setViewMode] = useState<'split' | 'studio' | 'watch'>('split')
   const [studioView, setStudioView] = useState<'projects' | 'editor'>('projects')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
@@ -93,131 +92,14 @@ export default function BitcoinRadio() {
     { id: 'automated', name: 'AI Generated', icon: <Sparkles className="w-4 h-4" /> },
   ]
 
-  const audioShows: AudioShow[] = [
-    {
-      id: '1',
-      title: 'Craig Wright Finally Admits: He\'s Actually the Guy Who Invented Excel 📊',
-      thumbnail: 'https://picsum.photos/320/180?random=1',
-      channel: 'The Crypto Onion Radio',
-      listeners: '42.3K',
-      timestamp: '2 hours ago',
-      duration: '0:47',
-      verified: true,
-      live: true,
-      category: 'podcasts'
-    },
-    {
-      id: '2',
-      title: 'Cookie Monster Reveals Addiction: It Was Blocksize All Along 🍪',
-      thumbnail: 'https://picsum.photos/320/180?random=2',
-      channel: 'SesameStreet Radio',
-      listeners: '38.9K',
-      timestamp: '5 hours ago',
-      duration: '0:23',
-      verified: true,
-      category: 'podcasts'
-    },
-    {
-      id: '3',
-      title: 'BSV Surpasses 7 Daily Users: Network in Crisis from Overload 💥',
-      thumbnail: 'https://picsum.photos/320/180?random=3',
-      channel: 'Blockchain News Radio',
-      listeners: '15.7K',
-      timestamp: '1 hour ago',
-      duration: '2:34',
-      verified: true,
-      automated: true,
-      category: 'automated'
-    },
-    {
-      id: '4',
-      title: 'Miners Demand Bigger Blocks, Core Suggests Smaller Brains 🧠',
-      thumbnail: 'https://picsum.photos/320/180?random=4',
-      channel: 'Bitcoin Satirical Radio',
-      listeners: '22.1K',
-      timestamp: '1 day ago',
-      duration: '1:12',
-      verified: true,
-      category: 'live'
-    },
-    {
-      id: '5',
-      title: 'Lightning Devs Introduce New Feature: Pay $5 to Wait Faster ⚡',
-      thumbnail: 'https://picsum.photos/320/180?random=5',
-      channel: 'TechSatire Radio',
-      listeners: '29.4K',
-      timestamp: '3 days ago',
-      duration: '0:31',
-      verified: true,
-      category: 'education'
-    },
-    {
-      id: '6',
-      title: 'Vitalik Explains ETH Merge in 47 Hours, Audience Still Waiting for Block Confirmation',
-      thumbnail: 'https://picsum.photos/320/180?random=6',
-      channel: 'Ethereum Comedy Radio',
-      listeners: '19.2K',
-      timestamp: '30 minutes ago',
-      duration: '47:03',
-      verified: false,
-      automated: true,
-      category: 'automated'
-    },
-    {
-      id: '7',
-      title: 'Wall Street Firm Buys Bitcoin, Accidentally Purchases Dogecoin Instead 🐕',
-      thumbnail: 'https://picsum.photos/320/180?random=7',
-      channel: 'Financial Comedy Hour',
-      listeners: '34.8K',
-      timestamp: '6 hours ago',
-      duration: '0:29',
-      verified: false,
-      category: 'analysis'
-    },
-    {
-      id: '8',
-      title: 'Influencer Loses Keys, Blames Mercury Retrograde 🔮',
-      thumbnail: 'https://picsum.photos/320/180?random=8',
-      channel: 'CryptoAstrology Radio',
-      listeners: '28.7K',
-      timestamp: '2 days ago',
-      duration: '0:15',
-      verified: false,
-      category: 'education'
-    }
-  ]
+  // Shows come from creators saving them on-chain; no made-up listings.
+  const audioShows: AudioShow[] = []
 
   const filteredShows = selectedCategory === 'all' 
     ? audioShows 
     : audioShows.filter(v => v.category === selectedCategory)
 
-  // Studio projects data  
-  const projects = [
-    {
-      id: '1',
-      name: 'Bitcoin Halving Podcast',
-      thumbnail: 'https://picsum.photos/320/180?random=10',
-      duration: '45:24',
-      lastModified: '2 hours ago',
-      status: 'draft' as const
-    },
-    {
-      id: '2', 
-      name: 'Lightning Network Radio Show',
-      thumbnail: 'https://picsum.photos/320/180?random=11',
-      duration: '1:08:45',
-      lastModified: '1 day ago', 
-      status: 'published' as const
-    },
-    {
-      id: '3',
-      name: 'Market Analysis Radio',
-      thumbnail: 'https://picsum.photos/320/180?random=12',
-      duration: '32:12',
-      lastModified: '3 days ago',
-      status: 'processing' as const
-    }
-  ]
+
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -255,21 +137,6 @@ export default function BitcoinRadio() {
   const openProject = (project: RadioProject) => {
     setStudioView('editor')
   }
-
-  useEffect(() => {
-    // Simulate loading
-    setTimeout(() => setIsLoading(false), 1500)
-    
-    const interval = setInterval(() => {
-      const change = (Math.random() - 0.5) * 5
-      setBtcPrice((prev) => {
-        const newPrice = parseFloat(prev.replace(',', '')) + change
-        return newPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })
-      })
-      setPriceChange(change > 0 ? `+${change.toFixed(1)}%` : `${change.toFixed(1)}%`)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <DevSidebarProvider>
@@ -351,15 +218,6 @@ export default function BitcoinRadio() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-2 sm:gap-4">
-              {/* BTC Price Ticker */}
-              <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-radio-brown-500/10 to-yellow-500/10 rounded-xl border border-radio-brown-500/20 shadow-lg">
-                <Bitcoin className="w-4 h-4 text-radio-brown-500" />
-                <span className="font-mono font-bold">${btcPrice}</span>
-                <span className={`text-sm ${priceChange.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
-                  {priceChange}
-                </span>
-              </div>
-
               <div className="flex items-center gap-2">
                 <Link
                   href="/create"
@@ -497,34 +355,6 @@ export default function BitcoinRadio() {
                   </div>
                   <div className="h-full bg-gradient-to-b from-gray-950 via-black to-gray-950 rounded-xl overflow-hidden border border-blue-500/30 p-4">
                     <div className="h-full overflow-y-auto">
-                      {/* Featured Section */}
-                      {selectedCategory === 'all' && (
-                        <section className="mb-6">
-                          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-radio-brown-500/20 via-radio-brown-600/10 to-yellow-500/20 p-6 border border-radio-brown-500/20 backdrop-blur-sm shadow-xl">
-                            <div className="absolute top-3 right-3">
-                              <span className="px-2 py-1 bg-red-600 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg animate-pulse">
-                                <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
-                                LIVE
-                              </span>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Bitcoin Halving Countdown</h3>
-                            <p className="text-gray-300 mb-4 text-sm">Next halving in 142 days - Listen to live radio analysis</p>
-                            <div className="flex gap-3">
-                              <button 
-                                onClick={() => handleAudioClick({ id: 'live', title: 'Bitcoin Halving Countdown', thumbnail: '', channel: 'Live', listeners: '', timestamp: '', duration: '', verified: true, live: true, category: 'news' })}
-                                className="px-4 py-2 bg-gradient-to-r from-radio-brown-500 to-radio-brown-600 rounded-lg font-semibold hover:from-radio-brown-600 hover:to-radio-brown-700 transition-all duration-300 flex items-center gap-2 shadow-lg text-sm"
-                              >
-                                <Volume2 className="w-4 h-4" />
-                                Listen Live
-                              </button>
-                              <button className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg font-medium hover:bg-white/20 transition-all duration-300 border border-white/10 text-sm">
-                                Set Reminder
-                              </button>
-                            </div>
-                          </div>
-                        </section>
-                      )}
-
                       {/* Audio Shows List */}
                       <AnimatePresence mode="wait">
                         {isLoading ? (
@@ -540,6 +370,7 @@ export default function BitcoinRadio() {
                             transition={{ duration: 0.5 }}
                             className="space-y-3"
                           >
+                            {filteredShows.length === 0 && <p className="col-span-full py-8 text-center text-gray-400">No shows yet.</p>}
                             {filteredShows.slice(0, 6).map((audioShow, index) => (
                               <motion.div
                                 key={audioShow.id}
@@ -631,34 +462,6 @@ export default function BitcoinRadio() {
             ) : (
               /* Full Listen Mode */
               <div className="h-[calc(100vh-200px)]">
-                {/* Featured Section */}
-                {selectedCategory === 'all' && (
-                  <section className="mb-8">
-                    <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-radio-brown-500/20 via-radio-brown-600/10 to-yellow-500/20 p-10 border border-radio-brown-500/20 backdrop-blur-sm shadow-2xl">
-                      <div className="absolute top-4 right-4">
-                        <span className="px-3 py-1.5 bg-red-600 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg animate-pulse">
-                          <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                          LIVE
-                        </span>
-                      </div>
-                      <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Bitcoin Halving Countdown</h2>
-                      <p className="text-gray-300 mb-6 text-lg">Next halving in 142 days - Listen to live radio analysis and predictions</p>
-                      <div className="flex gap-4">
-                        <button 
-                          onClick={() => handleAudioClick({ id: 'live', title: 'Bitcoin Halving Countdown', thumbnail: '', channel: 'Live', listeners: '', timestamp: '', duration: '', verified: true, live: true, category: 'news' })}
-                          className="px-8 py-3.5 bg-gradient-to-r from-radio-brown-500 to-radio-brown-600 rounded-xl font-semibold hover:from-radio-brown-600 hover:to-radio-brown-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-radio-brown-500/25 transform hover:scale-105"
-                        >
-                          <Volume2 className="w-5 h-5" />
-                          Listen Live
-                        </button>
-                        <button className="px-8 py-3.5 bg-white/10 backdrop-blur-sm rounded-xl font-medium hover:bg-white/20 transition-all duration-300 border border-white/10 hover:border-white/20">
-                          Set Reminder
-                        </button>
-                      </div>
-                    </div>
-                  </section>
-                )}
-
                 {/* Audio Shows List */}
                 <AnimatePresence mode="wait">
                   {isLoading ? (
@@ -674,6 +477,7 @@ export default function BitcoinRadio() {
                       transition={{ duration: 0.5 }}
                       className="space-y-4"
                     >
+                      {filteredShows.length === 0 && <div className="col-span-full py-8"><p className="mb-6 text-center text-gray-400">No shows yet. Save a short recording on-chain to be the first.</p><SaveOnChain accept="audio/*" noun="recording" /></div>}
                       {filteredShows.map((audioShow, index) => (
                         <motion.div
                           key={audioShow.id}
