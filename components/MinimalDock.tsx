@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
+
+const noopSubscribe = () => () => {};
 import { Store, FileText, Clock, Wifi, Battery, Wallet, Mail, Music, HardDrive, Calendar, Search, Table, Share2, Briefcase, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box } from 'lucide-react';
 import './MinimalDock.css';
+
+const APP_NAME: string = 'bitcoin-radio';
 
 interface DockApp {
   id?: string;
   name: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   color: string;
   url?: string;
   disabled?: boolean;
@@ -15,10 +19,10 @@ interface DockApp {
 
 const MinimalDock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [mounted, setMounted] = useState(false);
+  // true on the client, false during SSR, without a setState-in-effect
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   useEffect(() => {
-    setMounted(true);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -77,7 +81,7 @@ const MinimalDock: React.FC = () => {
 
   const handleAppClick = (app: DockApp) => {
     if (!app.disabled && app.url && !app.current) {
-      window.location.href = app.url;
+      window.location.assign(app.url);
     }
   };
 

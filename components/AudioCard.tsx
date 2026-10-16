@@ -98,8 +98,8 @@ export default function AudioCard({ audioShow }: AudioCardProps) {
                     className="bg-gradient-to-t from-radio-brown-500 to-radio-brown-400 rounded-full transition-all duration-300 group-hover:from-radio-brown-400 group-hover:to-radio-brown-300"
                     style={{
                       width: '2px',
-                      height: `${Math.random() * 70 + 10}%`,
-                      opacity: Math.random() * 0.7 + 0.3
+                      height: `${((i * 37) % 70) + 10}%`,
+                      opacity: ((i * 53) % 70) / 100 + 0.3
                     }}
                   />
                 ))}

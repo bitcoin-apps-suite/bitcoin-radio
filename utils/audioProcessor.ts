@@ -97,7 +97,7 @@ export class BitcoinAudioProcessor {
 
       // Read output file
       const data = await this.ffmpeg.readFile(outputName)
-      const audioBlob = new Blob([data], { type: `audio/${format}` })
+      const audioBlob = new Blob([typeof data === "string" ? data : new Uint8Array(data)], { type: `audio/${format}` })
 
       // Clean up
       await this.ffmpeg.deleteFile(inputName)
@@ -175,7 +175,7 @@ export class BitcoinAudioProcessor {
       await this.ffmpeg.exec(command)
 
       const data = await this.ffmpeg.readFile(outputName)
-      const audioBlob = new Blob([data], { type: 'audio/mp3' })
+      const audioBlob = new Blob([typeof data === "string" ? data : new Uint8Array(data)], { type: 'audio/mp3' })
 
       // Clean up
       await this.ffmpeg.deleteFile(inputName)
@@ -204,7 +204,7 @@ export class BitcoinAudioProcessor {
       await this.ffmpeg.exec(command)
 
       const data = await this.ffmpeg.readFile(outputName)
-      const audioBlob = new Blob([data], { type: `audio/${format}` })
+      const audioBlob = new Blob([typeof data === "string" ? data : new Uint8Array(data)], { type: `audio/${format}` })
 
       // Clean up
       await this.ffmpeg.deleteFile(inputName)

@@ -85,7 +85,7 @@ export default function Footer() {
             </div>
             
             <p className="text-gray-300 mb-6 leading-relaxed">
-              The world's first blockchain-native radio platform. Create, broadcast, and monetize 
+              The world&apos;s first blockchain-native radio platform. Create, broadcast, and monetize 
               your audio content with Bitcoin micropayments and NFT tokenization.
             </p>
 

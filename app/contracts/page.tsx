@@ -3,6 +3,24 @@
 import { useState, useEffect } from 'react'
 import { ChevronRight, Github, ExternalLink, Clock, DollarSign, Users, Code, AlertCircle } from 'lucide-react'
 
+interface GitHubIssue {
+  number: number;
+  title: string;
+  body: string | null;
+  html_url: string;
+  state: string;
+  assignee: { login: string } | null;
+  assigned_at?: string;
+}
+
+interface GitHubPull {
+  number: number;
+  body: string | null;
+  html_url: string;
+  state: 'open' | 'closed';
+  merged_at: string | null;
+}
+
 interface Contract {
   id: string;
   githubIssueNumber: number;
@@ -69,18 +87,18 @@ export default function ContractsPage() {
       
       // Also fetch pull requests to match with issues
       const prsResponse = await fetch('https://api.github.com/repos/bitcoin-apps-suite/bitcoin-video/pulls?state=all&per_page=100')
-      const pullRequests = prsResponse.ok ? await prsResponse.json() : []
+      const pullRequests: GitHubPull[] = prsResponse.ok ? await prsResponse.json() : []
       
       // Map issues to contracts - ONLY DEVELOPER CONTRACTS
-      const mappedContracts = issues.map((issue: unknown): Contract | null => {
+      const mappedContracts = (issues as GitHubIssue[]).map((issue): Contract | null => {
         const body = issue.body || ''
         
         const priorityMatch = body.match(/\*\*Priority:\*\*\s*(Critical|High|Medium|Low)/i)
         const hoursMatch = body.match(/\*\*Estimated Hours:\*\*\s*([\d,]+)/i)
-        let rewardMatch = body.match(/\*\*Token Reward:\*\*\s*([\d,]+)\s*BVIDEO/i)
+        const rewardMatch = body.match(/\*\*Token Reward:\*\*\s*([\d,]+)\s*BVIDEO/i)
         
         // Find matching PR if exists
-        const matchingPR = pullRequests.find((pr: unknown) => 
+        const matchingPR = pullRequests.find((pr) => 
           pr.body && pr.body.includes(`#${issue.number}`)
         )
         
@@ -94,7 +112,7 @@ export default function ContractsPage() {
         }
         
         // Parse tasks section for skills
-        let skills: string[] = ['TypeScript', 'React', 'Next.js']
+        const skills: string[] = ['TypeScript', 'React', 'Next.js']
         const tasksMatch = body.match(/##\s*(?:🎯\s*)?Tasks\s*\n([\s\S]*?)(?=##|$)/i)
         if (tasksMatch) {
           const tasks = tasksMatch[1]
@@ -156,7 +174,7 @@ export default function ContractsPage() {
           pullRequest: matchingPR ? {
             number: matchingPR.number,
             url: matchingPR.html_url,
-            status: matchingPR.state
+            status: (matchingPR.merged_at ? 'merged' : matchingPR.state) as 'open' | 'closed' | 'merged'
           } : undefined,
           skills,
           deliverables: deliverables.slice(0, 5) // Limit to 5 deliverables

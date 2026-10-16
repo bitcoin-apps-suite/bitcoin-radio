@@ -44,7 +44,7 @@ const RadioProjectSidebar: React.FC<RadioProjectSidebarProps> = ({
   uploadedFile
 }) => {
   const [projects, setProjects] = useState<RadioProject[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
@@ -86,30 +86,32 @@ const RadioProjectSidebar: React.FC<RadioProjectSidebarProps> = ({
   ]
 
   useEffect(() => {
-    setIsLoading(true)
     // Simulate API call
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setProjects(mockProjects)
       setIsLoading(false)
     }, 500)
+    return () => clearTimeout(timer)
   }, [refreshTrigger])
 
-  // Add uploaded file as new project
-  useEffect(() => {
+  // Add uploaded file as new project (adjust-state-on-prop-change pattern)
+  const [prevUploadedFile, setPrevUploadedFile] = useState(uploadedFile)
+  if (uploadedFile !== prevUploadedFile) {
+    setPrevUploadedFile(uploadedFile)
     if (uploadedFile) {
       const newProject: RadioProject = {
-        id: Date.now().toString(),
+        id: `${uploadedFile.lastModified}-${uploadedFile.name}`,
         name: uploadedFile.name.replace(/\.[^/.]+$/, ""),
-        thumbnail: 'https://picsum.photos/160/90?random=' + Date.now(),
+        thumbnail: 'https://picsum.photos/160/90?random=' + uploadedFile.lastModified,
         duration: '0:00',
         lastModified: 'Just now',
         status: 'draft',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        created_at: new Date(uploadedFile.lastModified).toISOString(),
+        updated_at: new Date(uploadedFile.lastModified).toISOString()
       }
       setProjects(prev => [newProject, ...prev])
     }
-  }, [uploadedFile])
+  }
 
   const filteredProjects = projects.filter(project =>
     project.name.toLowerCase().includes(searchQuery.toLowerCase())

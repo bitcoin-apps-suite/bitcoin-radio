@@ -22,6 +22,8 @@ export interface TokenizationOptions {
   price?: number;
   metadata?: {
     creator?: string;
+    author?: string;
+    category?: string;
     genre?: string;
     tags?: string[];
     thumbnail?: string;
