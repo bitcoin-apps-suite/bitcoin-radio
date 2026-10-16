@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import WalletButton from './WalletButton'
 import { Github, BookOpen } from 'lucide-react'
 import './TopMenuBar.css'
 
@@ -458,8 +459,7 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
 
       {/* Right side - Status items */}
       <div className="taskbar-status">
-        <span className="status-text">Connected</span>
-        <span className="status-indicator connected">●</span>
+        <WalletButton className="!py-0.5 !text-xs" />
         <a 
           href="https://x.com/bitcoin_video" 
           target="_blank" 

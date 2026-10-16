@@ -12,12 +12,13 @@
     "kill:all": "for port in {3000..3010}; do lsof -ti:$port | xargs kill -9 2>/dev/null || true; done"
   },
   "dependencies": {
+    "@bsv/sdk": "^2.8.11",
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
-    "@handcash/handcash-connect": "^0.8.11",
     "axios": "^1.12.2",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.22",
+    "howler": "^2.2.4",
     "lucide-react": "^0.544.0",
     "next": "16.1.6",
     "react": "19.1.0",
@@ -25,7 +26,6 @@
     "react-player": "^3.3.3",
     "recharts": "^3.2.1",
     "wavesurfer.js": "^7.7.2",
-    "howler": "^2.2.4",
     "web-audio-api": "^0.2.2"
   },
   "devDependencies": {

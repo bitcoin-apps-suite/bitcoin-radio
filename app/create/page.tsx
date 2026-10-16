@@ -29,6 +29,7 @@ import {
   Scissors
 } from 'lucide-react'
 import Link from 'next/link'
+import SaveOnChain from '@/components/SaveOnChain'
 import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
@@ -107,34 +108,10 @@ export default function CreatePage() {
     }
   ]
 
+  const [genNotice, setGenNotice] = useState('')
+  // AI generation needs a model provider and API keys that are not set up yet: say so, never fake results.
   const handleGenerateVideo = () => {
-    setGenerating(true)
-    setTimeout(() => {
-      setGeneratedVideos([
-        {
-          id: '1',
-          title: 'Crypto influencer uploads hate video seamlessly while complaining about fees',
-          duration: '0:34',
-          quality: 'HD',
-          platforms: ['spotify', 'apple-podcasts', 'twitter']
-        },
-        {
-          id: '2',
-          title: 'Government tech committee livestream goes surprisingly smooth',
-          duration: '1:12',
-          quality: '4K',
-          platforms: ['spotify', 'twitter', 'facebook']
-        },
-        {
-          id: '3',
-          title: 'Tech debate gets heated while everyone argues over text messages',
-          duration: '0:47',
-          quality: 'HD',
-          platforms: ['apple-podcasts', 'spotify', 'instagram']
-        }
-      ])
-      setGenerating(false)
-    }, 3000)
+    setGenNotice('AI generation is not live yet. Nothing was generated or charged.')
   }
 
   return (
@@ -318,7 +295,7 @@ export default function CreatePage() {
                     )}
                   </motion.button>
                   <span className="text-sm text-gray-400">
-                    Will generate 3-5 audio variations
+                    {genNotice || 'Will generate 3-5 audio variations'}
                   </span>
                 </div>
               </motion.div>
@@ -417,8 +394,11 @@ export default function CreatePage() {
                 Select Audio
               </label>
               <p className="text-sm text-gray-500 mt-4">
-                Supported formats: MP3, WAV, M4A, FLAC (max 1GB)
+                Opens in the browser editor. To keep a short recording on-chain, use Save on-chain below (up to 5 MB).
               </p>
+            </div>
+            <div className="mt-8">
+              <SaveOnChain accept="audio/*" noun="recording" />
             </div>
           </div>
         )}
