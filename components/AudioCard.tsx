@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Play, Headphones, Clock, Sparkles, Volume2, Radio } from 'lucide-react'
+import { Play, Headphones, Clock, Sparkles, Radio } from 'lucide-react';
 import Image from 'next/image'
 
 interface AudioCardProps {

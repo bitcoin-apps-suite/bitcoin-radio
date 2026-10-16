@@ -93,7 +93,6 @@ const TokenizeModal: React.FC<TokenizeModalProps> = ({
   title,
   duration,
   size,
-  url
 }) => {
   const [selectedProtocol, setSelectedProtocol] = useState('stas');
   const [tokenName, setTokenName] = useState(title || (contentType === 'audio' ? 'My Audio Token' : 'My Video Token'));

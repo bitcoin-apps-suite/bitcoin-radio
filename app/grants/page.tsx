@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Radio, DollarSign, Users, Code, Mic, Zap, CheckCircle, Clock, TrendingUp, Github } from 'lucide-react'
+import { Radio, DollarSign, Users, Code, Zap, CheckCircle, Clock, TrendingUp, Github } from 'lucide-react';
 import DevSidebar from '@/components/DevSidebar'
 import { DevSidebarProvider } from '@/components/DevSidebarProvider'
 import ResponsiveLayout from '@/components/ResponsiveLayout'

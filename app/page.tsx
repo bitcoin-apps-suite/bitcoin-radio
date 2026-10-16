@@ -1,35 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Search, 
-  Bell, 
-  Upload, 
-  User,
-  Bitcoin,
-  TrendingUp,
-  Play,
-  Sparkles,
-  BarChart3,
-  Home,
-  Compass,
-  BookOpen,
-  Video,
-  ToggleRight,
-  Settings,
-  Monitor,
-  Plus,
-  FileVideo,
-  Clock,
-  Folder,
-  Radio,
-  Mic,
-  Headphones,
-  Volume2,
-  MicIcon,
-  Music
-} from 'lucide-react'
+import { Search, Bell, Upload, User, TrendingUp, Sparkles, BarChart3, Home, BookOpen, Plus, FileVideo, Radio, Mic, Headphones, Music } from 'lucide-react';
 import Link from 'next/link'
 import AudioCard from '@/components/AudioCard'
 import AudioSkeleton from '@/components/AudioSkeleton'
@@ -132,10 +105,6 @@ export default function BitcoinRadio() {
 
   const handleNewProject = () => {
     createNewProject()
-  }
-
-  const openProject = (project: RadioProject) => {
-    setStudioView('editor')
   }
 
   return (

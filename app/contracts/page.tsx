@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ChevronRight, Github, ExternalLink, Clock, DollarSign, Users, Code, AlertCircle } from 'lucide-react'
+import { ChevronRight, Github, ExternalLink, Clock, DollarSign, Code } from 'lucide-react';
 
 interface GitHubIssue {
   number: number;

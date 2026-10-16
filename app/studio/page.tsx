@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image';
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
@@ -225,8 +226,11 @@ export default function StudioPage() {
                   className="bg-white/5 rounded-xl border border-white/10 overflow-hidden cursor-pointer hover:border-radio-brown-500/30 transition-all duration-300 group"
                 >
                   <div className="aspect-video relative">
-                    <img 
+                    <Image 
                       src={project.thumbnail} 
+                      fill 
+                      sizes="160px" 
+                      unoptimized 
                       alt={project.name}
                       className="w-full h-full object-cover"
                     />

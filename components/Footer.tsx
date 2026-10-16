@@ -2,20 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Radio, 
-  Bitcoin, 
-  Mail, 
-  Twitter, 
-  Github, 
-  Globe, 
-  Heart,
-  ExternalLink,
-  Podcast,
-  Headphones,
-  Music,
-  Mic
-} from 'lucide-react'
+import { Radio, Bitcoin, Mail, Twitter, Github, Globe, Heart, ExternalLink, Podcast, Headphones, Music } from 'lucide-react';
 import Link from 'next/link'
 
 export default function Footer() {

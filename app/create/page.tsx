@@ -2,32 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  ArrowLeft,
-  Upload,
-  Sparkles,
-  Video,
-  TrendingUp,
-  FileText,
-  Image as ImageIcon,
-  Mic,
-  Globe,
-  Youtube,
-  Twitter,
-  Bitcoin,
-  Zap,
-  Play,
-  Settings,
-  ChevronRight,
-  BarChart3,
-  Brain,
-  Clock,
-  DollarSign,
-  Hash,
-  Link2,
-  RefreshCw,
-  Scissors
-} from 'lucide-react'
+import { ArrowLeft, Upload, Sparkles, TrendingUp, FileText, Mic, Twitter, Zap, Play, BarChart3, Brain, Clock, DollarSign, RefreshCw, Scissors } from 'lucide-react';
 import Link from 'next/link'
 import SaveOnChain from '@/components/SaveOnChain'
 import ProofOfConceptBar from '@/components/ProofOfConceptBar'
@@ -41,15 +16,15 @@ import BitcoinRadioStudio from '@/components/BitcoinRadioStudio'
 export default function CreatePage() {
   const [activeTab, setActiveTab] = useState('auto-generate')
   const [selectedWorkflow, setSelectedWorkflow] = useState<string | null>(null)
-  const [generating, setGenerating] = useState(false)
+  const generating = false
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
-  const [generatedVideos, setGeneratedVideos] = useState<{
+  const generatedVideos: {
     id: string;
     title: string;
     duration: string;
     quality: string;
     platforms: string[];
-  }[]>([])
+  }[] = []
 
   const automationWorkflows = [
     {

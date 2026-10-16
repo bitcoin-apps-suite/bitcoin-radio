@@ -1,29 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { 
-  Scissors,
-  Download,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Settings,
-  Type,
-  Music,
-  Layers,
-  Undo,
-  Redo,
-  Save,
-  Bitcoin,
-  Sparkles,
-  Coins,
-  Mic,
-  Radio,
-  Headphones,
-  BarChart3
-} from 'lucide-react'
+
+import { Scissors, Download, Play, Pause, Volume2, VolumeX, Settings, Type, Music, Save, Bitcoin, Sparkles, Mic, Radio, Headphones, BarChart3 } from 'lucide-react';
 import TokenizeModal, { TokenizationOptions } from './TokenizeModal'
 
 interface BitcoinRadioStudioProps {

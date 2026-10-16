@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import WalletButton from './WalletButton'
-import { Github, BookOpen } from 'lucide-react'
+
 import './TopMenuBar.css'
 
 interface DropdownItem {
@@ -26,7 +26,7 @@ interface TopMenuBarProps {
   onSaveProject?: () => void
 }
 
-export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: TopMenuBarProps) {
+export default function TopMenuBar({ onNewProject, onSaveProject }: TopMenuBarProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const [showBAppsMenu, setShowBAppsMenu] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
