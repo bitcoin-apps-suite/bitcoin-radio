@@ -298,7 +298,7 @@ export default function BitcoinRadio() {
                         /* Studio Editor View */
                         <div className="h-full">
                           <BitcoinRadioStudio 
-                            initialVideoFile={uploadedFile}
+                            initialAudioFile={uploadedFile}
                             onSave={(blob) => {
                               console.log('Video saved:', blob)
                               setProjectSidebarRefresh(prev => prev + 1)

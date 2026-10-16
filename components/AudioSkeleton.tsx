@@ -12,7 +12,7 @@ export default function AudioSkeleton() {
                 className="bg-gray-600 rounded-full animate-pulse"
                 style={{
                   width: '3px',
-                  height: `${Math.random() * 100 + 20}%`,
+                  height: `${((i * 41) % 80) + 20}%`,
                   animationDelay: `${i * 0.1}s`
                 }}
               />

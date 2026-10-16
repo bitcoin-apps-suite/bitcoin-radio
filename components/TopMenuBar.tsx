@@ -62,7 +62,7 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
         { 
           label: 'Home', 
           shortcut: '⌘⇧H',
-          action: () => window.location.href = '/'
+          action: () => window.location.assign('/')
         },
         { divider: true },
         { 
@@ -176,20 +176,20 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
       items: [
         { 
           label: 'Radio Studio', 
-          action: () => window.location.href = '/?mode=studio'
+          action: () => window.location.assign('/?mode=studio')
         },
         { 
           label: 'Audio Exchange', 
-          action: () => window.location.href = '/exchange'
+          action: () => window.location.assign('/exchange')
         },
         { 
           label: 'Upload Audio', 
-          action: () => window.location.href = '/create?tab=upload'
+          action: () => window.location.assign('/create?tab=upload')
         },
         { divider: true },
         { 
           label: 'AI Automation', 
-          action: () => window.location.href = '/create?tab=ai'
+          action: () => window.location.assign('/create?tab=ai')
         },
         { 
           label: 'News → Audio', 
@@ -221,11 +221,11 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
         { divider: true },
         { 
           label: 'Home Feed', 
-          action: () => window.location.href = '/'
+          action: () => window.location.assign('/')
         },
         { 
           label: 'Trending', 
-          action: () => window.location.href = '/trending'
+          action: () => window.location.assign('/trending')
         },
         { 
           label: 'Categories', 
@@ -241,17 +241,17 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
         { 
           label: 'Actual Size', 
           shortcut: '⌘0', 
-          action: () => (document.body.style as any).zoom = '100%' 
+          action: () => document.body.style.setProperty('zoom', '100%') 
         },
         { 
           label: 'Zoom In', 
           shortcut: '⌘+', 
-          action: () => (document.body.style as any).zoom = '110%' 
+          action: () => document.body.style.setProperty('zoom', '110%') 
         },
         { 
           label: 'Zoom Out', 
           shortcut: '⌘-', 
-          action: () => (document.body.style as any).zoom = '90%' 
+          action: () => document.body.style.setProperty('zoom', '90%') 
         }
       ]
     },
@@ -362,7 +362,7 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
               className={`bapps-menu-item ${app.current ? 'current' : ''} ${app.disabled ? 'disabled' : ''}`}
               onClick={() => {
                 if (!app.disabled && !app.current && app.url !== '#') {
-                  window.location.href = app.url
+                  window.location.assign(app.url)
                 }
                 setShowBAppsMenu(false)
               }}
@@ -379,7 +379,7 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
       {/* Bitcoin Logo */}
       <div 
         className="taskbar-logo"
-        onDoubleClick={() => window.location.href = '/'}
+        onDoubleClick={() => window.location.assign('/')}
         title="Double-click to go home"
       >
         <span className="bitcoin-symbol">₿</span>
@@ -389,7 +389,7 @@ export default function TopMenuBar({ onOpenApp, onNewProject, onSaveProject }: T
       <button 
         className="mobile-title"
         onClick={() => {
-          window.location.href = '/'
+          window.location.assign('/')
         }}
         title="Bitcoin Radio - Tap to go home"
       >

@@ -341,7 +341,7 @@ export default function FeaturesPage() {
             {/* CTA Section */}
             <section className="cta-section">
               <h2>Ready to Create?</h2>
-              <p>Start using Bitcoin Radio's powerful features today</p>
+              <p>Start using Bitcoin Radio&apos;s powerful features today</p>
               <div className="cta-buttons">
                 <a href="/create" className="cta-btn primary">
                   <Video className="cta-icon" />

@@ -182,7 +182,7 @@ export default function CommissionsPage() {
                     <h3>DeFi vs Bitcoin Comparison</h3>
                     <div className="commission-budget">$800</div>
                   </div>
-                  <p>Professional comparison video highlighting Bitcoin's advantages over DeFi</p>
+                  <p>Professional comparison video highlighting Bitcoin&apos;s advantages over DeFi</p>
                   <div className="commission-meta">
                     <span className="deadline">Deadline: 10 days</span>
                     <span className="bids">7 bids</span>

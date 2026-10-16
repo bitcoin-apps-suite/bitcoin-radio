@@ -18,6 +18,8 @@ export function DevSidebarProvider({ children }: { children: React.ReactNode }) 
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('devSidebarCollapsed')
       const shouldBeCollapsed = saved !== null ? saved === 'true' : true
+      // Read persisted state after mount so server and client markup match on hydration.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsCollapsed(shouldBeCollapsed)
       setIsInitialized(true)
     }

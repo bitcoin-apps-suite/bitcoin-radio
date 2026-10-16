@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
+
+const noopSubscribe = () => () => {};
 import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, Radio } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
   id?: string;
   name: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   color: string;
   url?: string;
   disabled?: boolean;
@@ -15,10 +17,10 @@ interface DockApp {
 
 const Dock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [mounted, setMounted] = useState(false);
+  // true on the client, false during SSR, without a setState-in-effect
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   useEffect(() => {
-    setMounted(true);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -95,7 +97,7 @@ const Dock: React.FC = () => {
 
   const handleAppClick = (app: DockApp) => {
     if (!app.disabled && app.url && !app.current) {
-      window.location.href = app.url;
+      window.location.assign(app.url);
     }
   };
 
@@ -133,14 +135,14 @@ const Dock: React.FC = () => {
           <button 
             className="status-button" 
             title="Bitcoin Corporation"
-            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
+            onClick={() => window.location.assign('https://bitcoin-corp.vercel.app/')}
           >
             <Building2 className="status-icon" style={{ color: '#f7931a' }} />
           </button>
           <button 
             className="status-button" 
             title="Trust"
-            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
+            onClick={() => window.location.assign('https://bitcoin-corp.vercel.app/trust')}
           >
             <Shield className="status-icon" style={{ color: '#3b82f6' }} />
           </button>

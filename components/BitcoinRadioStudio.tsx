@@ -66,21 +66,26 @@ export default function BitcoinRadioStudio({
 
   useEffect(() => {
     // Simulate loading
-    setTimeout(() => setIsLoading(false), 1500)
+    const timer = setTimeout(() => setIsLoading(false), 1500)
+    return () => clearTimeout(timer)
+  }, [])
 
+  // Sync metadata when a new file prop arrives (adjust-state-on-prop-change pattern)
+  const [prevAudioFile, setPrevAudioFile] = useState<File | null | undefined>(undefined)
+  if (initialAudioFile !== prevAudioFile) {
+    setPrevAudioFile(initialAudioFile)
     if (initialAudioFile) {
-      const url = URL.createObjectURL(initialAudioFile)
       setAudioMetadata({
         title: initialAudioFile.name.replace(/\.[^/.]+$/, ""),
         duration: 0,
         size: initialAudioFile.size,
-        url: url
+        url: URL.createObjectURL(initialAudioFile)
       })
     }
-  }, [initialAudioFile])
+  }
 
-  const handleTokenize = (options: TokenizationOptions) => {
-    console.log('Tokenizing radio show with options:', options)
+  const handleTokenize = (protocol: string, options: TokenizationOptions) => {
+    console.log('Tokenizing radio show with options:', protocol, options)
     // Here you would implement the actual tokenization logic
     setShowTokenizeModal(false)
   }
