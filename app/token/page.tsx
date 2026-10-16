@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Coins, Code, Video, Users, TrendingUp, Zap, ChevronRight, Github, ExternalLink, PieChart, BarChart3 } from 'lucide-react'
+
 import DevSidebar from '@/components/DevSidebar'
 import { DevSidebarProvider } from '@/components/DevSidebarProvider'
 import ResponsiveLayout from '@/components/ResponsiveLayout'

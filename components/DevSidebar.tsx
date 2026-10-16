@@ -3,32 +3,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { useDevSidebar } from './DevSidebarProvider'
-import { 
-  ChevronLeft,
-  ChevronRight,
-  Monitor,
-  FileCode,
-  FileText,
-  Coins,
-  Github,
-  GitPullRequest,
-  BookOpen,
-  History,
-  CheckCircle,
-  Terminal,
-  Package,
-  Upload,
-  Video,
-  Sparkles,
-  BarChart3,
-  TrendingUp,
-  Search,
-  Briefcase,
-  Users,
-  Store,
-  Play,
-  Handshake
-} from 'lucide-react'
+import { ChevronLeft, ChevronRight, Monitor, FileText, Coins, Github, BookOpen, History, CheckCircle, Terminal, Package, Upload, Sparkles, BarChart3, TrendingUp, Search, Briefcase, Users, Store, Play, Handshake } from 'lucide-react';
 import './DevSidebar.css'
 
 export default function DevSidebar() {

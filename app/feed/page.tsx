@@ -1,24 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import Image from 'next/image';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Search, 
-  Bell, 
-  Upload, 
-  User,
-  Bitcoin,
-  TrendingUp,
-  Play,
-  Sparkles,
-  BarChart3,
-  Home,
-  Compass,
-  BookOpen,
-  Video,
-  ToggleRight,
-  Settings
-} from 'lucide-react'
+import { Search, Bell, Upload, User, TrendingUp, Sparkles, BarChart3, Home, Compass, BookOpen, Video, ToggleRight, Settings } from 'lucide-react';
 import Link from 'next/link'
 import AudioCard from '@/components/AudioCard'
 import AudioSkeleton from '@/components/AudioSkeleton'
@@ -82,8 +67,11 @@ export default function BitcoinRadio() {
             <div className="flex items-center gap-2 sm:gap-4 flex-1">
               <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
                 <div className="p-1 sm:p-1.5 bg-gradient-to-br from-radio-brown-500 to-radio-brown-600 rounded-xl shadow-lg group-hover:shadow-radio-brown-500/25 transition-all duration-300 group-hover:scale-110 animate-glow">
-                  <img 
+                  <Image 
                     src="/bitcoin-radio.jpg" 
+                    width={32}
+                    height={32}
+                    
                     alt="Bitcoin Radio"
                     className="w-6 sm:w-8 h-6 sm:h-8 object-cover rounded-lg group-hover:rotate-3 transition-transform"
                   />

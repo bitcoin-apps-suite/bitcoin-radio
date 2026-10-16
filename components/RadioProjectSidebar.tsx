@@ -1,21 +1,8 @@
 'use client'
 
+import Image from 'next/image';
 import React, { useState, useEffect, useCallback } from 'react'
-import { 
-  Radio, 
-  Plus, 
-  Search, 
-  MoreHorizontal, 
-  Clock,
-  Upload,
-  Play,
-  Trash2,
-  ArrowLeft,
-  ArrowRight,
-  AlertTriangle,
-  Mic,
-  Headphones
-} from 'lucide-react'
+import { Radio, Plus, Search, Clock, Play, Trash2, ArrowLeft, ArrowRight, AlertTriangle, Mic, Headphones } from 'lucide-react';
 
 interface RadioProject {
   id: string
@@ -48,42 +35,8 @@ const RadioProjectSidebar: React.FC<RadioProjectSidebarProps> = ({
   const [searchQuery, setSearchQuery] = useState('')
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
-  const [sidebarWidth, setSidebarWidth] = useState(280)
-  const [isResizing, setIsResizing] = useState(false)
+  const sidebarWidth = 280
 
-  // Mock data for demonstration
-  const mockProjects: RadioProject[] = [
-    {
-      id: '1',
-      name: 'Bitcoin Halving Special',
-      thumbnail: 'https://picsum.photos/160/90?random=1',
-      duration: '45:23',
-      lastModified: '2 hours ago',
-      status: 'draft',
-      created_at: '2024-01-15T10:30:00Z',
-      updated_at: '2024-01-15T12:30:00Z'
-    },
-    {
-      id: '2',
-      name: 'Lightning Network Deep Dive',
-      thumbnail: 'https://picsum.photos/160/90?random=2',
-      duration: '1:08:15',
-      lastModified: '1 day ago',
-      status: 'published',
-      created_at: '2024-01-14T09:00:00Z',
-      updated_at: '2024-01-14T10:08:00Z'
-    },
-    {
-      id: '3',
-      name: 'Market Analysis Podcast',
-      thumbnail: 'https://picsum.photos/160/90?random=3',
-      duration: '32:45',
-      lastModified: '3 days ago',
-      status: 'processing',
-      created_at: '2024-01-12T14:22:00Z',
-      updated_at: '2024-01-12T15:30:00Z'
-    }
-  ]
 
   useEffect(() => {
     // Simulate API call
@@ -256,8 +209,11 @@ const RadioProjectSidebar: React.FC<RadioProjectSidebarProps> = ({
                 >
                   <div className="flex items-start gap-3">
                     <div className="relative w-12 h-8 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                      <Image
                         src={project.thumbnail}
+                        fill
+                        sizes="160px"
+                        unoptimized
                         alt={project.name}
                         className="w-full h-full object-cover"
                       />
@@ -330,5 +286,39 @@ const RadioProjectSidebar: React.FC<RadioProjectSidebarProps> = ({
     </div>
   )
 }
+
+// Mock data for demonstration
+const mockProjects: RadioProject[] = [
+  {
+    id: '1',
+    name: 'Bitcoin Halving Special',
+    thumbnail: 'https://picsum.photos/160/90?random=1',
+    duration: '45:23',
+    lastModified: '2 hours ago',
+    status: 'draft',
+    created_at: '2024-01-15T10:30:00Z',
+    updated_at: '2024-01-15T12:30:00Z'
+  },
+  {
+    id: '2',
+    name: 'Lightning Network Deep Dive',
+    thumbnail: 'https://picsum.photos/160/90?random=2',
+    duration: '1:08:15',
+    lastModified: '1 day ago',
+    status: 'published',
+    created_at: '2024-01-14T09:00:00Z',
+    updated_at: '2024-01-14T10:08:00Z'
+  },
+  {
+    id: '3',
+    name: 'Market Analysis Podcast',
+    thumbnail: 'https://picsum.photos/160/90?random=3',
+    duration: '32:45',
+    lastModified: '3 days ago',
+    status: 'processing',
+    created_at: '2024-01-12T14:22:00Z',
+    updated_at: '2024-01-12T15:30:00Z'
+  }
+]
 
 export default RadioProjectSidebar

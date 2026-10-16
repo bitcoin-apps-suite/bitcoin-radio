@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import React, { useState, useEffect, useSyncExternalStore } from 'react';
 
 const noopSubscribe = () => () => {};
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, Radio } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, Radio } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -118,7 +119,7 @@ const Dock: React.FC = () => {
             >
               {app.id === 'bapps-store' ? (
                 <div className="dock-app-icon">
-                  <img src="/bapps-icon.jpg" alt="BAPPS" className="dock-app-image" />
+                  <Image src="/bapps-icon.jpg" alt="BAPPS" width={48} height={48} className="dock-app-image" />
                 </div>
               ) : (
                 <Icon className="dock-app-icon" style={{ color: getIconColor(app.color, index) }} />
